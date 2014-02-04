@@ -1,5 +1,8 @@
 package kipperorigin.armamentseffects.effects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import kipperorigin.armamentseffects.AE_Main;
 import kipperorigin.armamentseffects.event.AE_InteractEvent;
 import kipperorigin.armamentseffects.resources.AE_LaunchTnT;
@@ -38,8 +41,8 @@ public class AE_EffectTnT extends AE_EffectParent {
 		int timer = 0;
 		loc = loc.add(0, 1, 0);
 
-		Vector adjustY = new Vector(0, .35, 0);
-		Vector dir = event.getPlayer().getEyeLocation().getDirection().add(adjustY);
+		// Vector adjustY = new Vector(0, .35, 0);
+		// Vector dir = event.getPlayer().getEyeLocation().getDirection().add(adjustY);
 
 		if (args.length < 1 || args.length > 3)
 			return;
@@ -60,38 +63,48 @@ public class AE_EffectTnT extends AE_EffectParent {
 			}
 		}
 
-		if (args[0].equalsIgnoreCase("-s")) {
-			// Single shot
-			dir.normalize().multiply(multiply);
+		List<Vector> shots = new ArrayList<Vector>();
 
-			tnt.fireTnT(dir, loc, timer);
-			AE_RI.removeItem(event.getPlayer());
-		} else if (args[0].equalsIgnoreCase("-t")) {
+		if (args[0].equalsIgnoreCase("s")) {
+			// Single shot
+			shots.add(transform(loc, new Vector(0, 0.3, 1)));
+		} else if (args[0].equalsIgnoreCase("t")) {
 			// Trishot
-			// TODO
-		} else if (args[0].equalsIgnoreCase("-sg")) {
+			// Shot 1 slightly upward
+			shots.add(transform(loc, new Vector(0, 0.4, 1)));
+			// Shot 2 slightly to the left
+			shots.add(transform(loc, new Vector(0.25, 0.1, 1)));
+			// Shot 3 slightly to the right
+			shots.add(transform(loc, new Vector(-0.25, 0.1, 1)));
+		} else if (args[0].equalsIgnoreCase("sg")) {
 			// Shotgun
 			for (int i = 0; i < 8; i++) {
-				Vector vec = dir.clone().add(randomOffset());
-				vec.normalize().multiply(multiply);
-
-				tnt.fireTnT(vec, loc, timer);
-				AE_RI.removeItem(event.getPlayer());
+				shots.add(transform(loc, randomOffset()));
 			}
-		} else if (args[0].equalsIgnoreCase("-mr")) {
+		} else if (args[0].equalsIgnoreCase("mr")) {
 			// Mortar
 			// TODO
-		} else if (args[0].equalsIgnoreCase("-mn")) {
+		} else if (args[0].equalsIgnoreCase("mn")) {
 			// Mine
 			// TODO
-		} else if (args[0].equalsIgnoreCase("-sn")) {
+		} else if (args[0].equalsIgnoreCase("sn")) {
 			// Sniper
-			// TODO
+			shots.add(transform(loc, new Vector(0, 0, 1)));
+			multiply *= 5;
+		}
+
+		if (!shots.isEmpty()) {
+			for (Vector shot : shots) {
+				shot.normalize().multiply(multiply);
+				tnt.fireTnT(shot, loc, timer);
+			}
+
+			AE_RI.removeItem(event.getPlayer());
 		}
 	}
 
 	/**
-	 * Returns a random offset from -.375 to .375
+	 * Returns a random offset for shotgun effect
 	 *
 	 * @return Vector
 	 */
@@ -99,8 +112,51 @@ public class AE_EffectTnT extends AE_EffectParent {
 		return new Vector(
 			// Subtract 0.5 to get from -.5 to .5, multiply by .75 to confine
 			(Math.random() - 0.5) * 0.75,
-			(Math.random() - 0.5) * 0.75,
-			(Math.random() - 0.5) * 0.75
+			Math.random() * 0.5,
+			1
 		);
 	}
+
+	/**
+	 * Transforms a vector based on the way the player is facing
+	 *
+	 * Code borrowed from https://github.com/Bukkit/Bukkit/pull/1012
+	 *
+	 * X = left
+	 * Y = up
+	 * Z = forward
+	 *
+	 * @param loc Player's location
+	 * @param vec Vector
+	 * @return
+	 */
+	private Vector transform(Location loc, Vector vec) {
+		final double yaw = Math.toRadians(loc.getYaw());
+        final double pitch = Math.toRadians(loc.getPitch());
+
+        final double cosYaw = Math.cos(yaw);
+        final double sinYaw = Math.sin(yaw);
+        final double cosPitch = Math.cos(pitch);
+        final double sinPitch = Math.sin(pitch);
+
+        final Vector left = new Vector(
+                cosYaw,
+                0,
+                sinYaw
+        );
+
+        final Vector up = new Vector(
+                -sinYaw * sinPitch,
+                cosPitch,
+                cosYaw * sinPitch
+        );
+
+        final Vector forward = new Vector(
+                -sinYaw * cosPitch,
+                -sinPitch,
+                cosYaw * cosPitch
+        );
+
+        return left.multiply(vec.getX()).add(up.multiply(vec.getY())).add(forward.multiply(vec.getZ()));
+    }
 }
