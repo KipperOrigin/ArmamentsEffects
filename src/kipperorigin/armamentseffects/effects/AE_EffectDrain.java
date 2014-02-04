@@ -16,7 +16,7 @@ public class AE_EffectDrain extends AE_EffectParent {
 		this.plugin = plugin;
 	}
 
-	AE_RemoveItem AE_RI = new AE_RemoveItem();
+	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
 
 	@Override
 	public void run(AE_DamageEvent event) {

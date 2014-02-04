@@ -1,5 +1,6 @@
 package kipperorigin.armamentseffects.effects;
 
+import kipperorigin.armamentseffects.AE_Main;
 import kipperorigin.armamentseffects.event.AE_DamageEvent;
 import kipperorigin.armamentseffects.resources.AE_Color;
 import kipperorigin.armamentseffects.resources.AE_RemoveItem;
@@ -11,7 +12,13 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class AE_EffectDisarm extends AE_EffectParent {
 	
-	private AE_RemoveItem AE_RI = new AE_RemoveItem();
+	private AE_Main plugin;
+
+	public AE_EffectDisarm(AE_Main plugin) {
+		this.plugin = plugin;
+	}
+	
+	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
 	AE_Color color = new AE_Color();
 
 	@Override

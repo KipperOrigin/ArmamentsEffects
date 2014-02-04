@@ -27,7 +27,7 @@ public class AE_EffectParticle extends AE_EffectParent implements Listener {
 		this.plugin = plugin;
 	}
 
-	AE_RemoveItem AE_RI = new AE_RemoveItem();
+	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
 
 	@Override
 	public void run(final AE_ProjectileEvent event) {

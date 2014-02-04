@@ -1,5 +1,6 @@
 package kipperorigin.armamentseffects.effects;
 
+import kipperorigin.armamentseffects.AE_Main;
 import kipperorigin.armamentseffects.event.AE_DamageEvent;
 import kipperorigin.armamentseffects.event.AE_ProjectileHitEvent;
 import kipperorigin.armamentseffects.resources.AE_Explode;
@@ -11,7 +12,13 @@ import org.bukkit.entity.Player;
 
 public class AE_EffectExplode extends AE_EffectParent {
 
-	AE_RemoveItem AE_RI = new AE_RemoveItem();
+	private AE_Main plugin;
+
+	public AE_EffectExplode(AE_Main plugin) {
+		this.plugin = plugin;
+	}
+	
+	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
 	AE_Explode explode = new AE_Explode();
 
 	@Override

@@ -23,11 +23,10 @@ public class AE_EffectFireworkParticle extends AE_EffectParent implements Listen
 	private AE_Main plugin;
 
 	public AE_EffectFireworkParticle(AE_Main plugin) {
-
 		this.plugin = plugin;
 	}
 
-	AE_RemoveItem AE_RI = new AE_RemoveItem();
+	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
 	AE_FireworkEffectPlayer fplayer = new AE_FireworkEffectPlayer();
 	AE_CheckFireworkColor colorCheck = new AE_CheckFireworkColor();
 	

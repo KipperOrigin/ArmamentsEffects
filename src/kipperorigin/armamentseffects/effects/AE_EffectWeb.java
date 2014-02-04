@@ -20,7 +20,7 @@ public class AE_EffectWeb extends AE_EffectParent {
 		this.plugin = plugin;
 	}
 
-	AE_RemoveItem AE_RI = new AE_RemoveItem();
+	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
 	AE_Color color = new AE_Color();
 
 	@Override

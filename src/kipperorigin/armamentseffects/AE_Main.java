@@ -39,12 +39,12 @@ public class AE_Main extends JavaPlugin {
 		listener.registerEffect("leech", drain);
 
 		// disarm
-		AE_EffectDisarm disarm = new AE_EffectDisarm();
+		AE_EffectDisarm disarm = new AE_EffectDisarm(this);
 		listener.registerEffect("disarm", disarm);
 		listener.registerEffect("unarm", disarm);
 
 		// explode
-		AE_EffectExplode explode = new AE_EffectExplode();
+		AE_EffectExplode explode = new AE_EffectExplode(this);
 		listener.registerEffect("explode", explode);
 		listener.registerEffect("boom", explode);
 		
@@ -54,17 +54,17 @@ public class AE_Main extends JavaPlugin {
 		listener.registerEffect("fireworkparticle", firework);
 
 		// instakill
-		AE_EffectInstakill instakill = new AE_EffectInstakill();
+		AE_EffectInstakill instakill = new AE_EffectInstakill(this);
 		listener.registerEffect("instakill", instakill);
 		listener.registerEffect("slay", instakill);
 
 		// instapotion
-		AE_EffectPotionRightClick potright = new AE_EffectPotionRightClick();
+		AE_EffectPotionRightClick potright = new AE_EffectPotionRightClick(this);
 		listener.registerEffect("Instapot", potright);
 		listener.registerEffect("Poteffect", potright);
 
 		// potions
-		AE_EffectPotions potions = new AE_EffectPotions();
+		AE_EffectPotions potions = new AE_EffectPotions(this);
 		listener.registerEffect("inflict", potions);
 		listener.registerEffect("apply", potions);
 
@@ -75,17 +75,17 @@ public class AE_Main extends JavaPlugin {
 		listener.registerEffect("cast", shoot);
 
 		// sound
-		AE_EffectSound sound = new AE_EffectSound();
+		AE_EffectSound sound = new AE_EffectSound(this);
 		listener.registerEffect("playsound", sound);
 		listener.registerEffect("play", sound);
 
 		// spawnmob
-		AE_EffectSpawn spawn = new AE_EffectSpawn();
+		AE_EffectSpawn spawn = new AE_EffectSpawn(this);
 		listener.registerEffect("spawn", spawn);
 		listener.registerEffect("summon", spawn);
 
 		// stun
-		AE_EffectStun stun = new AE_EffectStun();
+		AE_EffectStun stun = new AE_EffectStun(this);
 		listener.registerEffect("stun", stun);
 		listener.registerEffect("stop", stun);
 		
@@ -100,7 +100,7 @@ public class AE_Main extends JavaPlugin {
 		listener.registerEffect("unbreaking", unbreakable);
 
 		// velocity
-		AE_EffectVelocity velocity = new AE_EffectVelocity();
+		AE_EffectVelocity velocity = new AE_EffectVelocity(this);
 		listener.registerEffect("velocity", velocity);
 		listener.registerEffect("speed", velocity);
 

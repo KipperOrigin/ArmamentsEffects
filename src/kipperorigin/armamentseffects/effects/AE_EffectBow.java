@@ -3,48 +3,39 @@ package kipperorigin.armamentseffects.effects;
 import java.util.ArrayList;
 import java.util.List;
 
-import kipperorigin.armamentseffects.AE_Main;
-import kipperorigin.armamentseffects.event.AE_InteractEvent;
-import kipperorigin.armamentseffects.resources.AE_LaunchTnT;
-import kipperorigin.armamentseffects.resources.AE_RemoveItem;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-public class AE_EffectTnT extends AE_EffectParent {
+import kipperorigin.armamentseffects.AE_Main;
+import kipperorigin.armamentseffects.event.AE_ProjectileEvent;
+import kipperorigin.armamentseffects.resources.AE_RemoveItem;
 
+public class AE_EffectBow extends AE_EffectParent {
+	
 	private AE_Main plugin;
 
-	public AE_EffectTnT(AE_Main plugin) {
+	public AE_EffectBow(AE_Main plugin) {
 		this.plugin = plugin;
 	}
 
 	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
-	AE_LaunchTnT tnt = new AE_LaunchTnT();
-
+	
 	@Override
-	public void run(final AE_InteractEvent event) {
-		/* -s Single
-		 * -t Trishot
+	public void run(final AE_ProjectileEvent event) {
+		/* -t Trishot
 		 * -sg Shotgun
-		 * -mr Mortar
-		 * -mn Mine
 		 * -sn Sniper
 		 * -b Burst (x3)
 		 */
-
+		
 		final String args[] = event.getArgs();
 		Player player = event.getPlayer();
 		Location loc = player.getLocation();
 		int multiply = 1;
-		int timer = 0;
 		loc = loc.add(0, 1, 0);
-
-		// Vector adjustY = new Vector(0, .35, 0);
-		// Vector dir = event.getPlayer().getEyeLocation().getDirection().add(adjustY);
-
-		if (args.length < 1 || args.length > 3)
+		
+		if (args.length < 1 || args.length > 2)
 			return;
 
 		if (args.length >= 2) {
@@ -56,15 +47,11 @@ public class AE_EffectTnT extends AE_EffectParent {
 		}
 
 		if (args.length >= 3) {
-			try {
-				timer = Integer.parseInt(args[2]);
-			} catch (NumberFormatException e) {
-				return;
-			}
+			return;
 		}
-
+		
 		List<Vector> shots = new ArrayList<Vector>();
-
+		
 		if (args[0].equalsIgnoreCase("s")) {
 			// Single shot
 			shots.add(transform(loc, new Vector(0, 0.3, 1)));
@@ -99,7 +86,6 @@ public class AE_EffectTnT extends AE_EffectParent {
 		if (!shots.isEmpty()) {
 			for (Vector shot : shots) {
 				shot.normalize().multiply(multiply);
-				tnt.fireTnT(shot, loc, timer);
 			}
 
 			AE_RI.removeItem(event.getPlayer());

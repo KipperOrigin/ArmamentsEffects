@@ -3,6 +3,7 @@ package kipperorigin.armamentseffects.effects;
 import java.util.ArrayList;
 import java.util.List;
 
+import kipperorigin.armamentseffects.AE_Main;
 import kipperorigin.armamentseffects.event.AE_DamageEvent;
 import kipperorigin.armamentseffects.resources.AE_RemoveItem;
 
@@ -12,7 +13,13 @@ import org.bukkit.potion.PotionEffectType;
 
 public class AE_EffectStun extends AE_EffectParent {
 
-	AE_RemoveItem AE_RI = new AE_RemoveItem();
+	private AE_Main plugin;
+
+	public AE_EffectStun(AE_Main plugin) {
+		this.plugin = plugin;
+	}
+	
+	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
 
 	@Override
 	public void run(AE_DamageEvent event) {

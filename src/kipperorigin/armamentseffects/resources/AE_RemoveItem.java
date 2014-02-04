@@ -2,6 +2,9 @@ package kipperorigin.armamentseffects.resources;
 
 import java.util.List;
 
+import kipperorigin.armamentseffects.AE_Main;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -9,6 +12,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class AE_RemoveItem {
 
+	private AE_Main plugin;
+
+	public AE_RemoveItem(AE_Main plugin) {
+		this.plugin = plugin;
+	}
+	
 	public String stripColors(String line) {
 		return line.replaceAll("(\u00A7|&)[0-9A-Fa-fK-Ok-oRr]", "");
 	}
@@ -19,7 +28,7 @@ public class AE_RemoveItem {
 
 	@SuppressWarnings("deprecation")
 	public void removeItem(Player player) {
-		ItemStack item = player.getItemInHand();
+		final ItemStack item = player.getItemInHand();
 		if (!item.hasItemMeta())
 			return;
 		ItemMeta meta = item.getItemMeta();
@@ -33,7 +42,6 @@ public class AE_RemoveItem {
 			String[] partsx = linex.split(" +", 2);
 			String name = parts[0];
 			if (name.equalsIgnoreCase("Durability") || name.equalsIgnoreCase("Uses")) {
-				System.out.println("debug1");
 				if (parts.length != 2) {
 					return;
 				} else {
@@ -45,16 +53,20 @@ public class AE_RemoveItem {
 					}
 					x = Integer.parseInt(parts[1]);
 					x = x - 1;
-					System.out.println("debug2");
 					if (x <= 0) {
 						player.setItemInHand(null);
 					} else {
-						System.out.println("debug3");
 						String num = String.valueOf(x);
 						lore.set(i, color("&r" + partsx[0] + " " + num));
 						meta.setLore(lore);
 						item.setItemMeta(meta);
-						item.setDurability(item.getType().getMaxDurability());
+						final short dur = (short) (item.getDurability() - item.getType().getMaxDurability());
+						Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+							@Override
+							public void run() {
+								item.setDurability(dur);
+							}
+						}, 1L);
 					}
 				}
 			}
