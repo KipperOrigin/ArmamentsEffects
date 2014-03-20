@@ -8,6 +8,7 @@ public class AE_Event {
 	private final Player player;
 	private final ItemStack item;
 	private String[] args;
+	private String[] argsColored;
 
 	public AE_Event(Player player) {
 		this.player = player;
@@ -28,5 +29,13 @@ public class AE_Event {
 
 	public final String[] getArgs() {
 		return args;
+	}
+	
+	public final void setArgsColored(String[] args) {
+		this.argsColored = args;
+	}
+
+	public final String[] getArgsColored() {
+		return argsColored;
 	}
 }

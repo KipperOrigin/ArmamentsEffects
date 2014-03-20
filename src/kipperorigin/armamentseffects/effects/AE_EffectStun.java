@@ -3,23 +3,13 @@ package kipperorigin.armamentseffects.effects;
 import java.util.ArrayList;
 import java.util.List;
 
-import kipperorigin.armamentseffects.AE_Main;
 import kipperorigin.armamentseffects.event.AE_DamageEvent;
-import kipperorigin.armamentseffects.resources.AE_RemoveItem;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class AE_EffectStun extends AE_EffectParent {
-
-	private AE_Main plugin;
-
-	public AE_EffectStun(AE_Main plugin) {
-		this.plugin = plugin;
-	}
-	
-	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
 
 	@Override
 	public void run(AE_DamageEvent event) {
@@ -43,7 +33,6 @@ public class AE_EffectStun extends AE_EffectParent {
 		stuns.add(new PotionEffect(PotionEffectType.SLOW_DIGGING, length, 127));
 
 		target.addPotionEffects(stuns);
-		AE_RI.removeItem(event.getPlayer());
 	}
 
 }

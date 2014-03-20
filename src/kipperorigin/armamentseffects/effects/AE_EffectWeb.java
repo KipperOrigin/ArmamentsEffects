@@ -3,7 +3,6 @@ package kipperorigin.armamentseffects.effects;
 import kipperorigin.armamentseffects.AE_Main;
 import kipperorigin.armamentseffects.event.AE_DamageEvent;
 import kipperorigin.armamentseffects.resources.AE_Color;
-import kipperorigin.armamentseffects.resources.AE_RemoveItem;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -20,7 +19,6 @@ public class AE_EffectWeb extends AE_EffectParent {
 		this.plugin = plugin;
 	}
 
-	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
 	AE_Color color = new AE_Color();
 
 	@Override
@@ -98,7 +96,6 @@ public class AE_EffectWeb extends AE_EffectParent {
 					y.setType(maty);
 			}
 		}, timer * 20L);
-		AE_RI.removeItem(event.getPlayer());
 		return;
 	}
 

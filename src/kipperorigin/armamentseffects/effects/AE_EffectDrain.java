@@ -2,7 +2,6 @@ package kipperorigin.armamentseffects.effects;
 
 import kipperorigin.armamentseffects.AE_Main;
 import kipperorigin.armamentseffects.event.AE_DamageEvent;
-import kipperorigin.armamentseffects.resources.AE_RemoveItem;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
@@ -15,8 +14,6 @@ public class AE_EffectDrain extends AE_EffectParent {
 	public AE_EffectDrain(AE_Main plugin) {
 		this.plugin = plugin;
 	}
-
-	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
 
 	@Override
 	public void run(AE_DamageEvent event) {
@@ -49,7 +46,6 @@ public class AE_EffectDrain extends AE_EffectParent {
 			else
 				player.setHealth(player.getHealth() + amp);
 		}
-		AE_RI.removeItem(event.getPlayer());
 		return;
 	}
 }

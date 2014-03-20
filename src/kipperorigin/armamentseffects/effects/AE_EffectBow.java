@@ -3,24 +3,14 @@ package kipperorigin.armamentseffects.effects;
 import java.util.ArrayList;
 import java.util.List;
 
+import kipperorigin.armamentseffects.event.AE_ProjectileEvent;
+
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import kipperorigin.armamentseffects.AE_Main;
-import kipperorigin.armamentseffects.event.AE_ProjectileEvent;
-import kipperorigin.armamentseffects.resources.AE_RemoveItem;
-
 public class AE_EffectBow extends AE_EffectParent {
-	
-	private AE_Main plugin;
 
-	public AE_EffectBow(AE_Main plugin) {
-		this.plugin = plugin;
-	}
-
-	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
-	
 	@Override
 	public void run(final AE_ProjectileEvent event) {
 		/* -t Trishot
@@ -87,8 +77,6 @@ public class AE_EffectBow extends AE_EffectParent {
 			for (Vector shot : shots) {
 				shot.normalize().multiply(multiply);
 			}
-
-			AE_RI.removeItem(event.getPlayer());
 		}
 	}
 

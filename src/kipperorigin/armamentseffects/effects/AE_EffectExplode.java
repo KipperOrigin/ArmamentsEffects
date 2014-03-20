@@ -1,24 +1,15 @@
 package kipperorigin.armamentseffects.effects;
 
-import kipperorigin.armamentseffects.AE_Main;
 import kipperorigin.armamentseffects.event.AE_DamageEvent;
 import kipperorigin.armamentseffects.event.AE_ProjectileHitEvent;
 import kipperorigin.armamentseffects.resources.AE_Explode;
-import kipperorigin.armamentseffects.resources.AE_RemoveItem;
 
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 public class AE_EffectExplode extends AE_EffectParent {
-
-	private AE_Main plugin;
-
-	public AE_EffectExplode(AE_Main plugin) {
-		this.plugin = plugin;
-	}
 	
-	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
 	AE_Explode explode = new AE_Explode();
 
 	@Override
@@ -36,10 +27,9 @@ public class AE_EffectExplode extends AE_EffectParent {
 			}
 			power = Integer.parseInt(args[0]);
 		}
-		explode.createExplosion(target, power);
 		if (power > 25)
 			return;
-		AE_RI.removeItem(event.getPlayer());
+		explode.createExplosion(target, power);
 		return;
 	}
 
@@ -72,7 +62,6 @@ public class AE_EffectExplode extends AE_EffectParent {
 		if (power < 25)
 			return;
 		explode.createExplosion(loc, power);
-		AE_RI.removeItem(event.getPlayer());
 		return;
 	}
 }

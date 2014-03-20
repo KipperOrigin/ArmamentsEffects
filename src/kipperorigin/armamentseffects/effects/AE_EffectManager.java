@@ -107,13 +107,15 @@ public class AE_EffectManager implements Listener {
 
 		if (event.isCancelled() && !player.hasPermission("ae.admin"))
 			return;
+        if ((player.getItemInHand().getType() == Material.BOW) || (player.getItemInHand().getType() == Material.SNOW_BALL) || (player.getItemInHand().getType() == Material.POTION))
+            return;
 
 		if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			runEvent(new AE_InteractEvent(player, event.getClickedBlock().getLocation(), event));
 		} else if (event.getAction() == Action.RIGHT_CLICK_AIR) {
 			runEvent(new AE_InteractEvent(player, loc, event));
 		} else {
-			runEvent(new AE_InteractEvent(player, loc, event));
+			return;
 		}
 	}
 
@@ -161,9 +163,11 @@ public class AE_EffectManager implements Listener {
 		List<String> lore = meta.getLore();
 
 		for (String line : lore) {
+			String lineColored = line;
 			line = stripColors(line);
 
 			String[] parts = line.split(" +", 2);
+			String[] partsColored = lineColored.split(" +", 2);
 			String name = parts[0];
 
 			AE_EffectParent effect = getEffect(name);
@@ -175,8 +179,15 @@ public class AE_EffectManager implements Listener {
 				args = parts[1].split(" +");
 			else
 				args = new String[0];
+			
+			String[] argsColored;
+			if (parts.length == 2)
+				argsColored = partsColored[1].split(" +");
+			else
+				argsColored = new String[0];
 
 			data.setArgs(args);
+			data.setArgsColored(argsColored);
 			effect.run(data);
 		}
 	}
@@ -192,9 +203,11 @@ public class AE_EffectManager implements Listener {
 		List<String> lore = meta.getLore();
 
 		for (String line : lore) {
+			String lineColored = line;
 			line = stripColors(line);
 
 			String[] parts = line.split(" +", 2);
+			String[] partsColored = lineColored.split(" +", 2);
 			String name = parts[0];
 
 			AE_EffectParent effect = getEffect(name);
@@ -206,8 +219,15 @@ public class AE_EffectManager implements Listener {
 				args = parts[1].split(" +");
 			else
 				args = new String[0];
+			
+			String[] argsColored;
+			if (parts.length == 2)
+				argsColored = partsColored[1].split(" +");
+			else
+				argsColored = new String[0];
 
 			data.setArgs(args);
+			data.setArgsColored(argsColored);
 			effect.run(data);
 		}
 	}
@@ -223,9 +243,11 @@ public class AE_EffectManager implements Listener {
 		List<String> lore = meta.getLore();
 
 		for (String line : lore) {
+			String lineColored = line;
 			line = stripColors(line);
 
 			String[] parts = line.split(" +", 2);
+			String[] partsColored = lineColored.split(" +", 2);
 			String name = parts[0];
 
 			AE_EffectParent effect = getEffect(name);
@@ -237,8 +259,15 @@ public class AE_EffectManager implements Listener {
 				args = parts[1].split(" +");
 			else
 				args = new String[0];
+			
+			String[] argsColored;
+			if (parts.length == 2)
+				argsColored = partsColored[1].split(" +");
+			else
+				argsColored = new String[0];
 
 			data.setArgs(args);
+			data.setArgsColored(argsColored);
 			effect.run(data);
 		}
 	}
@@ -254,9 +283,11 @@ public class AE_EffectManager implements Listener {
 		List<String> lore = meta.getLore();
 
 		for (String line : lore) {
+			String lineColored = line;
 			line = stripColors(line);
 
 			String[] parts = line.split(" +", 2);
+			String[] partsColored = lineColored.split(" +", 2);
 			String name = parts[0];
 
 			AE_EffectParent effect = getEffect(name);
@@ -268,8 +299,15 @@ public class AE_EffectManager implements Listener {
 				args = parts[1].split(" +");
 			else
 				args = new String[0];
+			
+			String[] argsColored;
+			if (parts.length == 2)
+				argsColored = partsColored[1].split(" +");
+			else
+				argsColored = new String[0];
 
 			data.setArgs(args);
+			data.setArgsColored(argsColored);
 			effect.run(data);
 		}
 	}

@@ -6,7 +6,6 @@ import kipperorigin.armamentseffects.event.AE_ProjectileEvent;
 import kipperorigin.armamentseffects.event.AE_ProjectileHitEvent;
 import kipperorigin.armamentseffects.resources.AE_CheckFireworkColor;
 import kipperorigin.armamentseffects.resources.AE_FireworkEffectPlayer;
-import kipperorigin.armamentseffects.resources.AE_RemoveItem;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -26,7 +25,6 @@ public class AE_EffectFireworkParticle extends AE_EffectParent implements Listen
 		this.plugin = plugin;
 	}
 
-	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
 	AE_FireworkEffectPlayer fplayer = new AE_FireworkEffectPlayer();
 	AE_CheckFireworkColor colorCheck = new AE_CheckFireworkColor();
 	
@@ -129,7 +127,6 @@ public class AE_EffectFireworkParticle extends AE_EffectParent implements Listen
 		} catch (Exception e) {
 			return;
 		}
-		AE_RI.removeItem(event.getPlayer());
 		return;
 	}
 
@@ -174,7 +171,6 @@ public class AE_EffectFireworkParticle extends AE_EffectParent implements Listen
 		} catch (Exception e) {
 			return;
 		}
-		AE_RI.removeItem(event.getPlayer());
 		return;
 	}
 }

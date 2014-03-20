@@ -4,7 +4,6 @@ import kipperorigin.armamentseffects.AE_Main;
 import kipperorigin.armamentseffects.event.AE_DamageEvent;
 import kipperorigin.armamentseffects.event.AE_ProjectileEvent;
 import kipperorigin.armamentseffects.event.AE_ProjectileHitEvent;
-import kipperorigin.armamentseffects.resources.AE_RemoveItem;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -26,8 +25,6 @@ public class AE_EffectParticle extends AE_EffectParent implements Listener {
 
 		this.plugin = plugin;
 	}
-
-	AE_RemoveItem AE_RI = new AE_RemoveItem(plugin);
 
 	@Override
 	public void run(final AE_ProjectileEvent event) {
@@ -116,7 +113,6 @@ public class AE_EffectParticle extends AE_EffectParent implements Listener {
 		if (data == 0)
 			return;
 		projectile.getWorld().playEffect(loc, effect, data, 100);
-		AE_RI.removeItem(event.getPlayer());
 		return;
 	}
 
@@ -155,7 +151,6 @@ public class AE_EffectParticle extends AE_EffectParent implements Listener {
 		if (data == 0)
 			return;
 		victim.getWorld().playEffect(loc, effect, data, 100);
-		AE_RI.removeItem(event.getPlayer());
 		return;
 	}
 }
