@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kipperorigin.armamentseffects.event.AE_InteractEvent;
-import kipperorigin.armamentseffects.resources.AE_LaunchTnT;
+import kipperorigin.armamentseffects.resources.AE_LaunchProjectile;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -12,7 +12,7 @@ import org.bukkit.util.Vector;
 
 public class AE_EffectTnT extends AE_EffectParent {
 
-	AE_LaunchTnT tnt = new AE_LaunchTnT();
+	AE_LaunchProjectile tnt = new AE_LaunchProjectile();
 
 	@Override
 	public void run(final AE_InteractEvent event) {

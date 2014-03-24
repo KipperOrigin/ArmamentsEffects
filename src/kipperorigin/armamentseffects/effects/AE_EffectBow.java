@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kipperorigin.armamentseffects.event.AE_ProjectileEvent;
+import kipperorigin.armamentseffects.resources.AE_LaunchProjectile;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -11,6 +12,8 @@ import org.bukkit.util.Vector;
 
 public class AE_EffectBow extends AE_EffectParent {
 
+	AE_LaunchProjectile arrow = new AE_LaunchProjectile();
+	
 	@Override
 	public void run(final AE_ProjectileEvent event) {
 		/* -t Trishot
@@ -76,6 +79,7 @@ public class AE_EffectBow extends AE_EffectParent {
 		if (!shots.isEmpty()) {
 			for (Vector shot : shots) {
 				shot.normalize().multiply(multiply);
+				arrow.fireArrow(shot, loc);
 			}
 		}
 	}
