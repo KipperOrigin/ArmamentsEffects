@@ -135,7 +135,7 @@ public class AE_EffectManager implements Listener {
 
 		Player attacker = (Player) entity;
 
-		if (event.isCancelled() && !attacker.hasPermission("ae.admin"))
+		if (event.isCancelled())
 			return;
 
 		runEvent(new AE_ProjectileEvent(attacker, projectile, event));
@@ -143,8 +143,9 @@ public class AE_EffectManager implements Listener {
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void process(ProjectileHitEvent event) {
+		
+		boolean continueData = true;
 		Projectile projectile = event.getEntity();
-
 		LivingEntity entity = projectile.getShooter();
 
 		if (!(entity instanceof Player))
@@ -154,8 +155,11 @@ public class AE_EffectManager implements Listener {
 
 		Location location = event.getEntity().getLocation();
 
-		if (projectile.hasMetadata("Data")) {
-			Bukkit.getScheduler().cancelTasks(plugin);
+		int i = 0;
+		
+		while(projectile.hasMetadata("Data " + String.valueOf(i))) {
+			Bukkit.getScheduler().cancelTask(projectile.getMetadata("Data " + String.valueOf(i)).get(0).asInt());
+			i++;
 		}
 
 		projectile.eject();

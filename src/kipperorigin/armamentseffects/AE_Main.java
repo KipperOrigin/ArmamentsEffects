@@ -81,7 +81,7 @@ public class AE_Main extends JavaPlugin {
 		
 		// kill particles
 		AE_EffectKillParticles killparticles = new AE_EffectKillParticles(this);
-		listener.registerEffect("killallparticles", killparticles);
+		listener.registerEffect("killparticle", killparticles);
 		listener.registerEffect("killparticles", killparticles);
 		
 		// lightning
@@ -155,5 +155,4 @@ public class AE_Main extends JavaPlugin {
 		listener.registerEffect("teleport", teleport);
 		listener.registerEffect("move", teleport);
 	}
-
 }

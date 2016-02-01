@@ -15,6 +15,20 @@ public class AE_EffectKillParticles extends AE_EffectParent {
 	
 	@Override
 	public void run(final AE_InteractEvent event) {
-		Bukkit.getScheduler().cancelTasks(plugin);
+		String[] args = event.getArgs();
+		
+		if (args.length > 0) {
+			for(int i = 0; i <= args.length; i++) {
+				try {
+					Bukkit.getScheduler().cancelTask(Integer.parseInt(args[i]));
+				} catch (ArrayIndexOutOfBoundsException e) {
+					
+				} catch (NumberFormatException e) {
+					
+				}
+			}
+		} else {
+			Bukkit.getScheduler().cancelTasks(plugin);
+		}
 	}
 }

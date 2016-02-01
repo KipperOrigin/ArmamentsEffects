@@ -34,11 +34,8 @@ public class AE_EffectParticle extends AE_EffectParent implements Listener {
 		String[] args = event.getArgs();
 		int timer = 1;
 		
-		if (args.length == 0 || args[0].isEmpty())
+		if (args.length < 2 || args.length > 4)
 			return;
-		else if (args.length > 4) {
-			return;
-		}
 
 		if (args.length == 3) {
 			try {
@@ -85,14 +82,20 @@ public class AE_EffectParticle extends AE_EffectParent implements Listener {
 				}
 			}, 0L, timer).getTaskId();
 			MetadataValue x = new FixedMetadataValue(plugin, taskId);
-
-			if (args.length == 4 && args[3].equalsIgnoreCase("permanent")) {
-				
-			} else {
-				projectile.setMetadata("Data", x);
-				if (event.getRawEvent().isCancelled() && projectile.hasMetadata("Data"))
-					Bukkit.getScheduler().cancelTask(projectile.getMetadata("Data").get(0).asInt());
-			}
+			
+			
+	    	if (args.length >= 4 && args[3].equalsIgnoreCase("permanent")) {
+	    		event.getPlayer().sendMessage("taskId = " + String.valueOf(taskId));
+	    		return;
+	    	}
+	    	
+	    	
+			int i = 0;
+			
+			while(projectile.hasMetadata("Data " + String.valueOf(i))) 
+				i++;
+			
+			projectile.setMetadata("Data " + String.valueOf(i), x);
 		}
 
 
@@ -104,15 +107,8 @@ public class AE_EffectParticle extends AE_EffectParent implements Listener {
 		String[] args = event.getArgs();
 		final Location loc = event.getProjectile().getLocation();
 
-		if (args.length == 0 || args[0].isEmpty())
+		if (args.length < 2 || args.length > 4)
 			return;
-		else if (args.length > 4) {
-			return;
-		}
-		
-		if (projectile.hasMetadata("Data")) {
-			Bukkit.getScheduler().cancelTasks(plugin);
-		}
 
 		final String particle = args[0].toUpperCase();
 
@@ -156,8 +152,9 @@ public class AE_EffectParticle extends AE_EffectParent implements Listener {
 		String[] args = event.getArgs();
 		final Location loc = victim.getLocation();
 
-		if (args.length == 0 || args[0].isEmpty())
+		if (args.length < 2 || args.length > 4)
 			return;
+		
 		else if (args.length != 2 && args.length != 3) {
 			return;
 		}

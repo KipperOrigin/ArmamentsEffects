@@ -36,7 +36,7 @@ public class AE_EffectLightning extends AE_EffectParent implements Listener {
 		
 		if (args.length == 2) {
 			try {
-				Integer.parseInt(args[1]);
+				timer = Integer.parseInt(args[1]);
 			} catch (NumberFormatException e) {
 				
 			}
@@ -49,10 +49,13 @@ public class AE_EffectLightning extends AE_EffectParent implements Listener {
 			}
 		}, 0L, timer).getTaskId();
 		MetadataValue x = new FixedMetadataValue(plugin, taskId);
-		projectile.setMetadata("Data", x);
 		
-		if (event.getRawEvent().isCancelled() && projectile.hasMetadata("Data"))
-				Bukkit.getScheduler().cancelTask(projectile.getMetadata("Data").get(0).asInt());
+		int i = 0;
+		
+		while(projectile.hasMetadata("Data " + String.valueOf(i))) 
+			i++;
+		
+		projectile.setMetadata("Data " + String.valueOf(i), x);
 	}
 
 	@Override
