@@ -61,7 +61,6 @@ public class AE_EffectLightning extends AE_EffectParent implements Listener {
 	@Override
 	public void run(AE_ProjectileHitEvent event) {
 		String[] args = event.getArgs();
-		Bukkit.getScheduler().cancelTasks(plugin);
 		if (args.length == 0)
 			event.getLocation().getWorld().strikeLightning(event.getLocation());
 		else if (args.length <= 2 && args[0].equalsIgnoreCase("effect"))

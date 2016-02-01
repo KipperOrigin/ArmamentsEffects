@@ -83,8 +83,6 @@ public class AE_EffectFireworkParticle extends AE_EffectParent implements Listen
     public void run(AE_ProjectileHitEvent event) {
 	final Projectile projectile = event.getProjectile();
 	String[] args = event.getArgs();
-
-	Bukkit.getScheduler().cancelTasks(plugin);
 	
 	if (args.length != 2 || args[0].isEmpty())
 	    return;
