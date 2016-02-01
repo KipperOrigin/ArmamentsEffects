@@ -32,11 +32,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class AE_Main extends JavaPlugin {
 
 	private final PluginManager pm = Bukkit.getPluginManager();
+	private final AE_EffectManager listener = new AE_EffectManager();
 
 	@Override
 	public void onEnable() {
 		
-		final AE_EffectManager listener = new AE_EffectManager(this);
+
 		
 		pm.registerEvents(listener, this);
 
