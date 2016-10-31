@@ -22,16 +22,17 @@ import org.bukkit.entity.WitherSkull;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
 import kipperorigin.armamentseffects.AE_Main;
 
 public class AE_Shoot {
 	
-    private AE_Main plugin;
-
-    public AE_Shoot(AE_Main plugin) {
-        this.plugin = plugin;
+    private AE_Main plugin = JavaPlugin.getPlugin(AE_Main.class);
+    
+    public void registerPlugin(AE_Main plugin) {
+    	this.plugin = plugin;
     }
 	
 	public void shootItem (Vector vec, World world, Location loc, Boolean delay, ItemStack i) {
@@ -96,10 +97,84 @@ public class AE_Shoot {
         	player.sendMessage("Please use a valid projectile!");
         	return;
         }
+	}
+	
+	public boolean shootProjectileViaProjectile(Vector vec, Player player, String name, Projectile proj) {
+		Projectile projectile = null;
+		Boolean same = false;
+        if (name.equalsIgnoreCase("snowball"))
+        	if (!(proj instanceof Snowball)) {
+        		projectile = player.launchProjectile(Snowball.class);
+        		projectile.setVelocity(vec);
+        	} else {
+        		same = true;
+        	}
+        else if (name.equalsIgnoreCase("fireball"))
+        	if (!(proj instanceof Fireball)) {
+        		projectile = player.launchProjectile(Fireball.class);
+        		projectile.setVelocity(vec);
+        	} else {
+        		same = true;
+        	}
+        else if (name.equalsIgnoreCase("fireshot"))
+        	if (!(proj instanceof SmallFireball)) {
+        		projectile = player.launchProjectile(SmallFireball.class);
+        		projectile.setVelocity(vec);
+        	} else {
+        		same = true;
+        	}
+        else if (name.equalsIgnoreCase("fireblast"))
+        	if (!(proj instanceof LargeFireball)) {
+        		projectile = player.launchProjectile(LargeFireball.class);
+        		projectile.setVelocity(vec);
+        	} else {
+        		same = true;
+        	}
+        else if (name.equalsIgnoreCase("arrow"))
+        	if (!(proj instanceof Arrow)) {
+        		projectile = player.launchProjectile(Arrow.class);
+        		projectile.setVelocity(vec);
+        	} else {
+        		same = true;
+        	}
+        else if (name.equalsIgnoreCase("withershot"))
+        	if (!(proj instanceof WitherSkull)) {
+        		projectile = player.launchProjectile(WitherSkull.class);
+        		projectile.setVelocity(vec);
+        	} else {
+        		same = true;
+        	}
+        else if (name.equalsIgnoreCase("egg"))
+        	if (!(proj instanceof Egg)) {
+        		projectile = player.launchProjectile(Egg.class);
+        		projectile.setVelocity(vec);
+        	} else {
+        		same = true;
+        	}
+        else if (name.equalsIgnoreCase("fish"))
+        	if (!(proj instanceof Fish)) {
+        		projectile = player.launchProjectile(Fish.class);
+        		projectile.setVelocity(vec);
+        	} else {
+        		same = true;
+        	}
+        else if (name.equalsIgnoreCase("xpbottle"))
+        	if (!(proj instanceof ThrownExpBottle)) {
+        		projectile = player.launchProjectile(ThrownExpBottle.class);
+        		projectile.setVelocity(vec);
+        	} else {
+        		same = true;
+        	}
+        else {
+        	player.sendMessage("Please use a valid projectile!");
+        	return false;
+        }
         
         if (projectile != null) {
-        	MetadataValue x = new FixedMetadataValue(plugin, "projectile");	
+        	MetadataValue x = new FixedMetadataValue(plugin, 1);	
 			projectile.setMetadata("Generated", x);
         }
+
+        return same;
 	}
 }

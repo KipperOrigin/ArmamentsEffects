@@ -5,6 +5,7 @@ import kipperorigin.armamentseffects.event.AE_ProjectileEvent;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.Entity;
@@ -26,7 +27,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 @SuppressWarnings("deprecation")
 public class AE_EffectShoot extends AE_EffectParent {
 
-    @Override
+	@Override
     public void run(AE_ProjectileEvent event) {
         Player player = event.getPlayer();
         Projectile projectile = event.getProjectile();
@@ -34,33 +35,42 @@ public class AE_EffectShoot extends AE_EffectParent {
         Location location = event.getProjectile().getLocation();
         World world = location.getWorld();
         if (projectile instanceof Projectile) {
-            event.cancel();
             if (args.length == 1) {
-                if (args[0].equalsIgnoreCase("snowball"))
-                    player.launchProjectile(Snowball.class).setVelocity(projectile.getVelocity());
-                else if (args[0].equalsIgnoreCase("fireball"))
-                    player.launchProjectile(Fireball.class).setVelocity(projectile.getVelocity());
-                else if (args[0].equalsIgnoreCase("fireshot"))
-                    player.launchProjectile(SmallFireball.class).setVelocity(projectile.getVelocity());
-                else if (args[0].equalsIgnoreCase("fireblast"))
-                    player.launchProjectile(LargeFireball.class).setVelocity(projectile.getVelocity());
-                /* else if (args[0].equalsIgnoreCase("arrow"))
-                    player.launchProjectile(Arrow.class).setVelocity(projectile.getVelocity()); BORKED */
-                else if (args[0].equalsIgnoreCase("withershot"))
-                    player.launchProjectile(WitherSkull.class).setVelocity(projectile.getVelocity());
-                else if (args[0].equalsIgnoreCase("egg"))
-                    player.launchProjectile(Egg.class).setVelocity(projectile.getVelocity());
-                else if (args[0].equalsIgnoreCase("fish"))
-                    player.launchProjectile(Fish.class).setVelocity(projectile.getVelocity());
-                else if (args[0].equalsIgnoreCase("xpbottle"))
-                    player.launchProjectile(ThrownExpBottle.class).setVelocity(projectile.getVelocity());
-                else if (args[0].equalsIgnoreCase("charged_creeper")) {
+                if (args[0].equalsIgnoreCase("snowball") && !(projectile instanceof Snowball)) {
+                	event.cancel();
+                	player.launchProjectile(Snowball.class).setVelocity(projectile.getVelocity());
+                } else if (args[0].equalsIgnoreCase("fireball") && !(projectile instanceof Fireball)) {
+                	event.cancel();
+                	player.launchProjectile(Fireball.class).setVelocity(projectile.getVelocity());
+                } else if (args[0].equalsIgnoreCase("fireshot") && !(projectile instanceof SmallFireball)) {
+                	event.cancel();
+                	player.launchProjectile(SmallFireball.class).setVelocity(projectile.getVelocity());
+                } else if (args[0].equalsIgnoreCase("fireblast") && !(projectile instanceof LargeFireball)) {
+                	event.cancel();
+                	player.launchProjectile(LargeFireball.class).setVelocity(projectile.getVelocity());
+                } else if (args[0].equalsIgnoreCase("arrow") && !(projectile instanceof Arrow)) {
+                	event.cancel();
+                	player.launchProjectile(Arrow.class).setVelocity(projectile.getVelocity());
+                } else if (args[0].equalsIgnoreCase("withershot") && !(projectile instanceof WitherSkull)) {
+                	event.cancel();
+                	player.launchProjectile(WitherSkull.class).setVelocity(projectile.getVelocity());
+                } else if (args[0].equalsIgnoreCase("egg") && !(projectile instanceof Egg)) {
+                	event.cancel();
+                	player.launchProjectile(Egg.class).setVelocity(projectile.getVelocity());
+                } else if (args[0].equalsIgnoreCase("fish") && !(projectile instanceof Fish)) {
+                	event.cancel();
+                	player.launchProjectile(Fish.class).setVelocity(projectile.getVelocity());
+                } else if (args[0].equalsIgnoreCase("xpbottle") && !(projectile instanceof ThrownExpBottle)) {
+                	event.cancel();
+                	player.launchProjectile(ThrownExpBottle.class).setVelocity(projectile.getVelocity());
+                } else if (args[0].equalsIgnoreCase("charged_creeper")) {
                     Creeper creeper = (Creeper) world.spawnEntity(location, EntityType.CREEPER);
                     creeper.setPowered(true);
                     creeper.setVelocity(projectile.getVelocity());
                 }
             } else if (args.length > 1 && args.length <= 4) {
-            	if (args[0].equals("Dropped_Item") || args[0].equalsIgnoreCase("item")) {
+            	event.cancel();
+            	if (args[0].equalsIgnoreCase("dropped_item") || args[0].equalsIgnoreCase("item")) {
             		ItemStack i;
             		if (Material.valueOf(args[1].toUpperCase()) == null)
             			return;

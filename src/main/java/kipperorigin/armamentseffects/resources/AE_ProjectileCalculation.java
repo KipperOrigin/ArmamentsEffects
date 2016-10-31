@@ -18,11 +18,11 @@ public class AE_ProjectileCalculation {
 		);
 	}
 	
-	public Vector randomOffsetCustom(int i) {
+	public Vector randomOffsetTight() {
 		return new Vector(
-			(Math.random() - i) * .75,
-			Math.random() * i,
-			1
+			(Math.random() - 0.5) * .5,
+			Math.random() * 0.25,
+			1.5
 		);
 	}
 

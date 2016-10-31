@@ -28,6 +28,7 @@ import kipperorigin.armamentseffects.effects.AE_EffectTeleport;
 import kipperorigin.armamentseffects.effects.AE_EffectTnT;
 import kipperorigin.armamentseffects.effects.AE_EffectVelocity;
 import kipperorigin.armamentseffects.effects.AE_EffectWeb;
+import kipperorigin.armamentseffects.resources.AE_Shoot;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;

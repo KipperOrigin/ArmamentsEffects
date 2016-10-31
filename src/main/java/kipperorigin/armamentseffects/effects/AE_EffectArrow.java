@@ -15,9 +15,9 @@ import org.bukkit.util.Vector;
 
 import kipperorigin.armamentseffects.AE_Main;
 import kipperorigin.armamentseffects.event.AE_InteractEvent;
+import kipperorigin.armamentseffects.resources.AE_ProjectileCalculation;
 import kipperorigin.armamentseffects.event.AE_ProjectileEvent;
 import kipperorigin.armamentseffects.resources.AE_LaunchTnT;
-import kipperorigin.armamentseffects.resources.AE_ProjectileCalculation;
 import kipperorigin.armamentseffects.resources.AE_Shoot;
 
 public class AE_EffectArrow extends AE_EffectParent {
@@ -29,7 +29,7 @@ public class AE_EffectArrow extends AE_EffectParent {
     }
 	
 	AE_ProjectileCalculation calc = new AE_ProjectileCalculation();
-	AE_Shoot shoot = new AE_Shoot(plugin);
+	AE_Shoot shoot = new AE_Shoot();
 	AE_LaunchTnT tnt = new AE_LaunchTnT();
 	
     @Override
@@ -67,7 +67,12 @@ public class AE_EffectArrow extends AE_EffectParent {
 			shots.add(calc.transform(loc, new Vector(0.25, 0.1, 1)));
 			// Shot 3 slightly to the right
 			shots.add(calc.transform(loc, new Vector(-0.25, 0.1, 1)));
-		} else if (args[0].equalsIgnoreCase("sg")) {
+		} else if (args[0].equalsIgnoreCase("sgt")) {
+			// Shotgun
+			for (int i = 0; i < 8; i++) {
+				shots.add(calc.transform(loc, calc.randomOffsetTight()));
+			}
+		} else if (args[0].equalsIgnoreCase("sgw")) {
 			// Shotgun
 			for (int i = 0; i < 8; i++) {
 				shots.add(calc.transform(loc, calc.randomOffset()));
@@ -106,7 +111,7 @@ public class AE_EffectArrow extends AE_EffectParent {
 			}
     	} else if (args[2].equalsIgnoreCase("projectile")) {
     		
-			if (args.length != 3)
+			if (args.length != 4)
 				return;
 			
 			if (!shots.isEmpty()) {
@@ -218,15 +223,16 @@ public class AE_EffectArrow extends AE_EffectParent {
         World world = loc.getWorld();
         Vector vec = projectile.getVelocity();
         
-        if (projectile.hasMetadata("Generated"))
+        if (!args[0].equalsIgnoreCase("projectile") && !args[0].equalsIgnoreCase("block") && !args[0].equalsIgnoreCase("item") && !args[0].equalsIgnoreCase("entity"))
         	return;
         
-        event.cancel();
         if (args.length > 4 || args.length < 2)
         	return;
         if (args[0].equalsIgnoreCase("projectile")) {
         	if (args.length == 2) {
-        		shoot.shootProjectile(vec, player, args[1]);
+        		if (!shoot.shootProjectileViaProjectile(vec, player, args[1], projectile))
+        			event.cancel();
+        		else return;
         	} else return;
         } else if (args[0].equalsIgnoreCase("item")) {
         	ItemStack i;

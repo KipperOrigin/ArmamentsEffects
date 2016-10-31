@@ -3,8 +3,6 @@ package kipperorigin.armamentseffects.effects;
 import kipperorigin.armamentseffects.AE_Main;
 import kipperorigin.armamentseffects.event.AE_DamageEvent;
 import kipperorigin.armamentseffects.event.AE_ProjectileEvent;
-import kipperorigin.armamentseffects.event.AE_ProjectileHitEvent;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.Listener;
@@ -69,7 +67,7 @@ public class AE_EffectLightning extends AE_EffectParent implements Listener {
             Bukkit.getScheduler().cancelTask(projectile.getMetadata("Data").get(0).asInt());
     }
 
-    @Override
+    /* @Override
     public void run(AE_ProjectileHitEvent event) {
         String[] args = event.getArgs();
         if (args.length == 0)
@@ -79,10 +77,12 @@ public class AE_EffectLightning extends AE_EffectParent implements Listener {
         else return;
 
 
-    }
+    } */
 
     @Override
     public void run(AE_DamageEvent event) {
+    	if (event.getRawEvent().getDamager() instanceof Projectile)
+    		return;
         String[] args = event.getArgs();
         if (args.length == 0)
             event.getVictim().getLocation().getWorld().strikeLightning(event.getVictim().getLocation());

@@ -45,19 +45,19 @@ public class AE_EffectParticle extends AE_EffectParent implements Listener {
 
             if (args.length >= 2) {
             	try {
-            		timer = Integer.parseInt(args[1]);  
+            		timer = Integer.parseInt(args[2]);  
             	} catch (NumberFormatException e) {
             		player.sendMessage("ARGUMENT 3 MUST BE AN INTEGER");
             		return;
             	}
             }
-            if (args.length >= 3) {
+            /* if (args.length >= 3) {
             	try {
             		delay = Long.parseLong(args[2]);
             	} catch (NumberFormatException e) {
             		player.sendMessage("ARGUMENT 4 MUST BE AN INTEGER");
             	}
-            }
+            } */
             
             final String particle = args[0].toUpperCase();
 

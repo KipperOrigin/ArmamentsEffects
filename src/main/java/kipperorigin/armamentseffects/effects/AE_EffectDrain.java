@@ -2,6 +2,7 @@ package kipperorigin.armamentseffects.effects;
 
 import kipperorigin.armamentseffects.AE_Main;
 import kipperorigin.armamentseffects.event.AE_DamageEvent;
+import kipperorigin.armamentseffects.resources.AE_Color;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
@@ -14,6 +15,8 @@ public class AE_EffectDrain extends AE_EffectParent {
     public AE_EffectDrain(AE_Main plugin) {
         this.plugin = plugin;
     }
+    
+    private AE_Color color = new AE_Color();
 
     @Override
     public void run(AE_DamageEvent event) {
@@ -21,22 +24,30 @@ public class AE_EffectDrain extends AE_EffectParent {
         // final LivingEntity target = event.getVictim();
         String[] args = event.getArgs();
         double health = player.getHealth();
+        double originalhealth = player.getHealth();
         double maxhealth = player.getMaxHealth();
-        int perc = 0;
+        double perc = 0;
         
         try {
-        	perc = Integer.parseInt(args[0]) * (1/100);
+        	perc = Double.parseDouble(args[0]) * .01;
         } catch (NumberFormatException e) {
         	player.sendMessage("Arg 1 must be a number!");
         	return;
         }
-        
         health = health + (event.getRawEvent().getFinalDamage() * perc);
         
         if (health > maxhealth)
         	player.setHealth(maxhealth);
         else
         	player.setHealth(health);
+        
+        if (args.length == 2)
+        	if (args[1].equalsIgnoreCase("stats")) {
+        		player.sendMessage(color.color("&AOriginal Health&f = " + originalhealth));
+        		player.sendMessage(color.color("&AEnding Health&f = " + health));
+        		player.sendMessage(color.color("&AHealth Gained = " + (health - originalhealth)));
+        	}
+        		
         
         /* final double heal = target.getHealth();
         if (args.length == 0 || args[0].isEmpty()) {

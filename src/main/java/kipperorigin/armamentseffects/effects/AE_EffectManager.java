@@ -151,7 +151,7 @@ public class AE_EffectManager implements Listener {
 
         Player attacker = (Player) source;
 
-        if (event.isCancelled() && !attacker.hasPermission("ae.admin"))
+        if (event.isCancelled())
             return;
 
         runEvent(new AE_ProjectileEvent(attacker, projectile, event));

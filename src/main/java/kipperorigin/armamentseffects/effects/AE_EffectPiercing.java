@@ -14,8 +14,8 @@ public class AE_EffectPiercing extends AE_EffectParent {
     public void run(AE_DamageEvent event) {
     	Player player = event.getPlayer();
         String[] args = event.getArgs();
-        player.sendMessage("test");
         double d;
+        double ofd = event.getRawEvent().getFinalDamage();
         if (args.length < 4 && args.length > 1) {
             try {
             	d = Double.valueOf(args[1]);
@@ -73,6 +73,7 @@ public class AE_EffectPiercing extends AE_EffectParent {
             	player.sendMessage(color.color("&aMagic&f = " + event.getRawEvent().getDamage(EntityDamageEvent.DamageModifier.MAGIC)));
             	player.sendMessage(color.color("&aResistance&f = " + event.getRawEvent().getDamage(EntityDamageEvent.DamageModifier.RESISTANCE)));
             	player.sendMessage(color.color("&a__________"));
+            	player.sendMessage(color.color("&aDamage Increased = " + (event.getRawEvent().getFinalDamage() - ofd)));
             	player.sendMessage(color.color("&aFinal Damage = " + event.getRawEvent().getFinalDamage()));
             	player.sendMessage(color.color("&6-----Stats End-----"));
             }

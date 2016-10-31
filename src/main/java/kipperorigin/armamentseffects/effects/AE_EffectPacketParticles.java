@@ -36,8 +36,7 @@ public class AE_EffectPacketParticles extends AE_EffectParent implements Listene
 
 	@SuppressWarnings("deprecation")
 	@Override
-    public void run(final AE_ProjectileEvent event) {
-		
+    public void run(final AE_ProjectileEvent event) {		
 		final Player player = event.getPlayer();
 		final Projectile projectile = event.getProjectile();
 		String[] args = event.getArgs();
@@ -48,6 +47,10 @@ public class AE_EffectPacketParticles extends AE_EffectParent implements Listene
     	float xF = 0;
     	float yF = 0;
     	float zF = 0;
+    	float[] f = {0,0,0,0,0,0};
+    	
+		if (event.getRawEvent().isCancelled())
+			return;
 		
 		if (args.length == 0 || args.length > 12)
 			return;
@@ -90,15 +93,16 @@ public class AE_EffectPacketParticles extends AE_EffectParent implements Listene
 					return;
 				}
 			}
-		}
-		if (args.length >= 2)
+		}		
+		
+		if (args.length >= 2 && !args[1].equalsIgnoreCase("x"))
 			try {
 				particlePacket.getIntegers().write(0, Particle.valueOf(args[1].toUpperCase()).getId());
 			} catch (IllegalArgumentException e) {
 				player.sendMessage("ARGUMENT 2 IS AN INVALID PARTICLE SPREAD");
 				return;
 			}
-		if (args.length >= 3 && !args[2].equalsIgnoreCase("x"))
+		/* if (args.length >= 3 && !args[2].equalsIgnoreCase("x"))
 			try {
 				xF = Float.valueOf(args[2]);
 			} catch (NumberFormatException e) {
@@ -137,6 +141,24 @@ public class AE_EffectPacketParticles extends AE_EffectParent implements Listene
 				player.sendMessage("ARGUMENT 8 MUST BE X OR A NUMBER");
 				return;
 			}
+			*/
+		
+		int i = 3;
+		while (i <= 8) {
+			if (args.length >= i && !args[i-1].equalsIgnoreCase("x"))
+				try {
+					f[i-3] = Float.valueOf(args[i-1]);
+				} catch (NumberFormatException e) {
+					player.sendMessage("Argument " + (i) + " must be X or a number.");
+					return;
+				}
+			else break;
+			if (i >= 6)
+				particlePacket.getFloat().write(i-3, f[i-1]);
+		}
+		
+		final float[] ff = f;
+		
 		if (args.length >= 10)
 			if (args[9].equalsIgnoreCase("x"))
 				timer = 1;
@@ -176,9 +198,9 @@ public class AE_EffectPacketParticles extends AE_EffectParent implements Listene
             	List<Player> players = eg.getPlayersInRadius(50, projectile);
             	
         		particlePacket.getFloat()
-        			.write(0, (float) projectile.getLocation().getX() + fXF)
-        			.write(1, (float) projectile.getLocation().getY() + fYF)
-        			.write(2, (float) projectile.getLocation().getZ() + fZF)
+        			.write(0, (float) projectile.getLocation().getX() + ff[0])
+        			.write(1, (float) projectile.getLocation().getY() + ff[1])
+        			.write(2, (float) projectile.getLocation().getZ() + ff[2])
         			.write(6, 1F);
             	
             	if (players != null) {
@@ -207,12 +229,12 @@ public class AE_EffectPacketParticles extends AE_EffectParent implements Listene
         if (args.length == 12 && args[11].equalsIgnoreCase("permanent")) {
     		event.getPlayer().sendMessage("taskId = " + String.valueOf(taskId));
         } else {
-			int i = 0;
+			int ix = 0;
 			
 			while(projectile.hasMetadata("Data " + String.valueOf(i))) 
-				i++;
+				ix++;
 			
-			projectile.setMetadata("Data " + String.valueOf(i), x);
+			projectile.setMetadata("Data " + String.valueOf(ix), x);
             if (event.getRawEvent().isCancelled() && projectile.hasMetadata("Data"))
                 Bukkit.getScheduler().cancelTask(projectile.getMetadata("Data").get(0).asInt());
         }

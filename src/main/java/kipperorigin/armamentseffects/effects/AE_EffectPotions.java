@@ -50,7 +50,7 @@ public class AE_EffectPotions extends AE_EffectParent {
         return;
     }
 
-    @Override
+   /* @Override
     public void run(AE_ProjectileHitEvent event) {
         Location location = event.getLocation();
         String[] args = event.getArgs();
@@ -95,5 +95,5 @@ public class AE_EffectPotions extends AE_EffectParent {
         pot.leaveVehicle();
         pot.setVelocity(event.getProjectile().getVelocity());
         return;
-    }
+    } */
 }
