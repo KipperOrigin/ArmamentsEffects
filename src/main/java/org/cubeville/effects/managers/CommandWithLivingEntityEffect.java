@@ -29,7 +29,7 @@ public class CommandWithLivingEntityEffect extends EffectWithLivingEntity
         return ret;
     }
 
-    public void play(LivingEntity entity) {
+    public void play(Player player, LivingEntity entity) {
         String c = command;        
         if(c.contains("%player%") && (entity instanceof Player)) {
             Player p = (Player) entity;

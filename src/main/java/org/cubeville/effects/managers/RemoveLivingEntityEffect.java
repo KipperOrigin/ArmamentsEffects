@@ -22,7 +22,7 @@ public class RemoveLivingEntityEffect extends EffectWithLivingEntity
         return getSerializationBase();
     }
 
-    public void play(LivingEntity entity) {
+    public void play(Player player, LivingEntity entity) {
         if(!(entity instanceof Player))
             entity.remove();
     }

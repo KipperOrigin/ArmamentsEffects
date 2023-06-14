@@ -33,7 +33,7 @@ public class InteractHookPlayer implements InteractHook
     }
 
     public void process(PlayerInteractEvent event) {
-        effect.play(event.getPlayer());
+        effect.play(event.getPlayer(), event.getPlayer());
     }
 
     public boolean usesEffect(Effect effect) {

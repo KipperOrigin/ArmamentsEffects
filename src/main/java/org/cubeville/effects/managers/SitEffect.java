@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.entity.Player;
 import org.bukkit.Location;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.ArmorStand;
@@ -21,7 +22,7 @@ public class SitEffect extends EffectWithLivingEntity
         return new HashMap<>();
     }
 
-    public void play(LivingEntity entity) {
+    public void play(Player player, LivingEntity entity) {
         if(entity.isInsideVehicle()) {
             Entity carrier = entity.getVehicle();
             //if(carrier instanceof Arrow) {

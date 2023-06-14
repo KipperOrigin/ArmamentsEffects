@@ -41,7 +41,7 @@ public class DisarmEffect extends EffectWithLivingEntity {
     }
 
     @Override
-    public void play(LivingEntity entity) {
+    public void play(Player p, LivingEntity entity) {
         if (!(entity instanceof Player)) return;
         Player player = (Player) entity;
         if (offhand) {

@@ -3,6 +3,7 @@ package org.cubeville.effects.managers;
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.entity.Player;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffectType;
@@ -53,7 +54,7 @@ public class PotionEffect extends EffectWithLivingEntity
         return ret;
     }
 
-    public void play(LivingEntity entity) {
+    public void play(Player player, LivingEntity entity) {
         entity.addPotionEffect(new org.bukkit.potion.PotionEffect(effectType, duration, amplifier));
     }
 

@@ -17,7 +17,7 @@ public class PlayerUtil
                 double dist = e.getLocation().distance(player.getLocation());
                 if(dist < 10) {
                     if(e instanceof LivingEntity) {
-                        if(e.getType() == EntityType.PLAYER || e.getType() == EntityType.VILLAGER || e.getType() == EntityType.PIG || e.getType() == EntityType.COW || e.getType() == EntityType.SHEEP || e.getType() == EntityType.CHICKEN || e.getType() == EntityType.HORSE || e.getType() == EntityType.MUSHROOM_COW || e.getType() == EntityType.WOLF || e.getType() == EntityType.OCELOT || e.getType() == EntityType.DONKEY) {
+                        if(e.getType() == EntityType.PLAYER || e.getType() == EntityType.VILLAGER || e.getType() == EntityType.PIG || e.getType() == EntityType.COW || e.getType() == EntityType.SHEEP || e.getType() == EntityType.CHICKEN || e.getType() == EntityType.HORSE || e.getType() == EntityType.MUSHROOM_COW || e.getType() == EntityType.WOLF || e.getType() == EntityType.OCELOT || e.getType() == EntityType.DONKEY || e.getType() == EntityType.SNOWMAN) {
                             Vector targetDirection = e.getLocation().subtract(player.getLocation()).toVector();
                             Vector playerDirection = player.getLocation().getDirection();
                             double angle = playerDirection.angle(targetDirection);

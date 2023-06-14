@@ -49,7 +49,7 @@ public class BrokenWandEffect extends EffectWithLivingEntity
         return ret;
     }
 
-    public void play(LivingEntity entity) {
+    public void play(Player player, LivingEntity entity) {
         if(!(entity instanceof Player)) return;
         if(rnd.nextInt(100) < webProbability) { // webbed
             final int x = entity.getLocation().getBlockX();

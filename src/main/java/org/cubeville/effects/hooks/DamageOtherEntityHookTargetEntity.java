@@ -3,6 +3,7 @@ package org.cubeville.effects.hooks;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.entity.Player;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -34,7 +35,8 @@ public class DamageOtherEntityHookTargetEntity implements DamageOtherEntityHook
     }
     
     public void process(EntityDamageByEntityEvent event) {
-        effect.play((LivingEntity) event.getEntity());
+        if(! (event.getDamager() instanceof Player)) return;
+        effect.play((Player) event.getDamager(), (LivingEntity) event.getEntity());
     }
 
     public boolean usesEffect(Effect effect) {
